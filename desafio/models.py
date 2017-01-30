@@ -10,4 +10,4 @@ class Solicitante(models.Model):
     telefone = models.CharField(max_length=11)
 
     def __str__(self):
-        return self.cpf
+        return self.nome + " (" + self.cpf + ")"

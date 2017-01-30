@@ -1,0 +1,11 @@
+<h1>Solicitantes</h1>
+<ul>
+    {% for solicitante in object_list %}
+    <li>{{ solicitante.nome }} - {{ solicitante.email }} - {{ solicitante.telefone }} -
+    <a href="{% url "solicitante_edit" solicitante.id %}">{{ solicitante.cpf }}</a>
+    <a href="{% url "solicitante_delete" solicitante.id %}">Apagar</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url "solicitante_new" %}">Novo solicitante</a>
