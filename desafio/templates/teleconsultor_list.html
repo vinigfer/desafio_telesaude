@@ -1,0 +1,12 @@
+<h1>Teleconsultores</h1>
+<ul>
+    {% for teleconsultor in object_list %}
+    <li>{{ teleconsultor.nome }} - {{ teleconsultor.email }} -
+    <a href="{% url "teleconsultor_edit" teleconsultor.id %}">{{ teleconsultor.crm }}</a>
+    - {{ teleconsultor.data_formatura }}
+    <a href="{% url "teleconsultor_delete" teleconsultor.id %}">Apagar</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url "teleconsultor_new" %}">Novo Teleconsultor</a>

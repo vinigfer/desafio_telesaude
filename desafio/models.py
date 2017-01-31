@@ -20,4 +20,4 @@ class Teleconsultor(models.Model):
     data_formatura = models.DateField()
 
     def __str__(self):
-        return self.nome + " (" + self.crm + ")"
+        return self.nome + " (" + str(self.crm) + ")"
