@@ -11,3 +11,13 @@ class Solicitante(models.Model):
 
     def __str__(self):
         return self.nome + " (" + self.cpf + ")"
+
+
+class Teleconsultor(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
+    email = models.CharField(max_length=50)
+    crm = models.IntegerField(unique=True)
+    data_formatura = models.DateField()
+
+    def __str__(self):
+        return self.nome + " (" + self.crm + ")"
