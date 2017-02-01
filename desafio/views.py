@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 
-from desafio.models import Solicitante, Teleconsultor
+from desafio.models import Solicitante, Teleconsultor, Solicitacao
 
 
 class SolicitanteForm(ModelForm):
@@ -78,3 +78,41 @@ def teleconsultor_delete(request, pk, template_name='teleconsultor_confirm_delet
         teleconsultor.delete()
         return redirect('teleconsultor_list')
     return render(request, template_name, {'object':teleconsultor})
+
+
+class SolicitacaoForm(ModelForm):
+    class Meta:
+        model = Solicitacao
+        fields = ['texto', 'data', 'solicitante', 'teleconsultor']
+
+
+def solicitacao_list(request, template_name='solicitacao_list.html'):
+    solicitacoes = Solicitacao.objects.all()
+    data = {}
+    data['object_list'] = solicitacoes
+    return render(request, template_name, data)
+
+
+def solicitacao_create(request, template_name='solicitacao_form.html'):
+    form = SolicitacaoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('solicitacao_list')
+    return render(request, template_name, {'form':form})
+
+
+def solicitacao_update(request, pk, template_name='solicitacao_form.html'):
+    solicitacao = get_object_or_404(Solicitacao, pk=pk)
+    form = SolicitacaoForm(request.POST or None, instance=solicitacao)
+    if form.is_valid():
+        form.save()
+        return redirect('solicitacao_list')
+    return render(request, template_name, {'form':form})
+
+
+def solicitacao_delete(request, pk, template_name='solicitacao_confirm_delete.html'):
+    solicitacao = get_object_or_404(Solicitacao, pk=pk)
+    if request.method == 'POST':
+        solicitacao.delete()
+        return redirect('solicitacao_list')
+    return render(request, template_name, {'object':solicitacao})

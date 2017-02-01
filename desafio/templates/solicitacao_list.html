@@ -1,0 +1,13 @@
+<h1>Solicitações</h1>
+<ul>
+    {% for solicitacao in object_list %}
+    <li>{{ solicitacao.solicitante }} -
+        {{ solicitacao.teleconsultor }} -
+        {{ solicitacao.data }} -
+    <a href="{% url "solicitacao_edit" solicitacao.id %}">{{ solicitacao.id }}</a>
+    <a href="{% url "solicitacao_delete" solicitacao.id %}">Apagar</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url "solicitacao_new" %}">Nova solicitação</a>

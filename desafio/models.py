@@ -31,3 +31,6 @@ class Solicitacao(models.Model):
 
     class Meta:
         unique_together = ('solicitante', 'data',)
+
+    def __str__(self):
+        return self.solicitante.nome + " - " + str(self.data)
