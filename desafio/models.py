@@ -21,3 +21,13 @@ class Teleconsultor(models.Model):
 
     def __str__(self):
         return self.nome + " (" + str(self.crm) + ")"
+
+
+class Solicitacao(models.Model):
+    texto = models.CharField(max_length=1000)
+    data = models.DateField()
+    solicitante = models.ForeignKey(Solicitante, on_delete=models.CASCADE)
+    teleconsultor = models.ForeignKey(Teleconsultor, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('solicitante', 'data',)
