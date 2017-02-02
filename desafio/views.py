@@ -4,6 +4,11 @@ from django.forms import ModelForm
 from desafio.models import Solicitante, Teleconsultor, Solicitacao
 
 
+def home(request, template_name='home.html'):
+    data = {}
+    return render(request, template_name, data)
+
+
 class SolicitanteForm(ModelForm):
     class Meta:
         model = Solicitante
