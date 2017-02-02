@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'telesaude',
         'USER': 'usuario',
         'PASSWORD': 'senha',
-        'HOST': 'database_server',
+        'HOST': 'database',
         'PORT': '5432',
     }
 }
