@@ -1,0 +1,3 @@
+CREATE USER usuario WITH PASSWORD 'senha';
+CREATE DATABASE telesaude;
+GRANT ALL PRIVILEGES ON DATABASE telesaude TO usuario;

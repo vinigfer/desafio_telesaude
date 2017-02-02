@@ -82,7 +82,8 @@ DATABASES = {
         'NAME': 'telesaude',
         'USER': 'usuario',
         'PASSWORD': 'senha',
-        'HOST': 'localhost',
+        'HOST': 'database_server',
+        'PORT': '5432',
     }
 }
 # Atualiza as informacoes do database caso estejamos utilizando heroku
