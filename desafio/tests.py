@@ -2,7 +2,9 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 
-from .models import Solicitante, Teleconsultor
+from .models import Solicitante, Teleconsultor, Solicitacao
+
+from datetime import datetime
 
 
 class SolicitanteTests(TestCase):
@@ -108,6 +110,85 @@ class TeleconsultorTests(TestCase):
             Teleconsultor.objects.create(nome="Leticia",
                                          data_formatura="2008-07-19",
                                          crm="57432", email="leticia@email.com")
+        except IntegrityError as e:
+            if 'unique constraint' in e.__str__():
+                self.assertTrue(True)
+            else:
+                raise Exception("Um erro inesperado ocorreu")
+
+
+class SolicitacaoTests(TestCase):
+    def create_solicitante_e_teleconsultor(self):
+        teleconsultor = Teleconsultor.objects.create(
+                                    nome="Jaqueline",
+                                    data_formatura="2010-01-27",
+                                    crm="57432", email="jaqueline@email.com")
+        solicitante = Solicitante.objects.create(
+                                    nome="Jose",
+                                    email="jose@email.com",
+                                    cpf="01022233345", telefone="5133337777")
+        return teleconsultor, solicitante
+
+    def test_create(self):
+        teleconsultor, solicitante = self.create_solicitante_e_teleconsultor()
+        Solicitacao.objects.create(texto="Solicito uma teleconsultoria",
+                                   data="2017-02-06",
+                                   solicitante=solicitante,
+                                   teleconsultor=teleconsultor)
+        response = self.client.get(reverse('solicitacao_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(response.context['object_list'],
+                                 ['<Solicitacao: Jose - 2017-02-06>'])
+
+    def test_read(self):
+        teleconsultor, solicitante = self.create_solicitante_e_teleconsultor()
+        Solicitacao.objects.create(texto="Solicito uma teleconsultoria",
+                                   data="2017-02-06",
+                                   solicitante=solicitante,
+                                   teleconsultor=teleconsultor)
+        response = self.client.get(reverse('solicitacao_list'))
+        self.assertEqual(len(response.context['object_list']), 1)
+
+    def test_update(self):
+        teleconsultor, solicitante = self.create_solicitante_e_teleconsultor()
+        solicitacao = Solicitacao.objects.create(
+                                    texto="Solicito uma teleconsultoria",
+                                    data="2017-02-06",
+                                    solicitante=solicitante,
+                                    teleconsultor=teleconsultor)
+        response = self.client.get(reverse('solicitacao_list'))
+        self.assertQuerysetEqual(response.context['object_list'],
+                                 ['<Solicitacao: Jose - 2017-02-06>'])
+
+        hoje = datetime.now()
+        solicitacao.data = hoje
+        solicitacao.save()
+        hoje_yyyy_mm_dd = hoje.strftime('%Y-%m-%d')
+        response = self.client.get(reverse('solicitacao_list'))
+        self.assertQuerysetEqual(response.context['object_list'],
+                                 ['<Solicitacao: Jose - ' +
+                                  hoje_yyyy_mm_dd + '>'])
+
+    def test_delete(self):
+        teleconsultor, solicitante = self.create_solicitante_e_teleconsultor()
+        Solicitacao.objects.create(
+            texto="Solicito uma teleconsultoria",
+            data="2017-02-06",
+            solicitante=solicitante,
+            teleconsultor=teleconsultor)
+        response = self.client.get(reverse('solicitacao_list'))
+        self.assertEqual(len(response.context['object_list']), 1)
+
+        Solicitacao.objects.filter(
+            solicitante=solicitante,
+            data="2017-02-06").delete()
+        response = self.client.get(reverse('solicitacao_list'))
+        self.assertEqual(len(response.context['object_list']), 0)
+
+    def test_mesmo_solicitante_duas_solicitacoes_em_um_dia(self):
+        try:
+            self.create_solicitante_e_teleconsultor()
+            self.create_solicitante_e_teleconsultor()
         except IntegrityError as e:
             if 'unique constraint' in e.__str__():
                 self.assertTrue(True)
