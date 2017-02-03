@@ -16,6 +16,8 @@ class Solicitante(models.Model):
 class Teleconsultor(models.Model):
     nome = models.CharField(max_length=100, unique=True)
     email = models.CharField(max_length=50)
+    # nao esta descrito no PDF, mas em principio cada CRM
+    # pode pertencer somente a um Teleconsultor
     crm = models.IntegerField(unique=True)
     data_formatura = models.DateField()
 
