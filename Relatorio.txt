@@ -1,0 +1,24 @@
+Maiores dificuldades
+- Não ter conhecimento em Django, Heroku, docker-compose e Ansible. Muita
+coisa para aprender em pouco tempo.
+
+Partes boas
+- Oportunidade de colocar em prática conhecimentos dos quais fazia certo tempo
+que não utilizava (Docker/Vagrant).
+- Oportunidade de aprendizado.
+
+Partes ruins
+- Em diversos momentos gastei muito tempo com coisas simples, mas que acredito
+que poderia ter identificado o problema mais rapidamente se tivesse mais
+experiência. Ex: Gastei aprox 1h por conta de ter esquecido um $ nas URLs
+(http://stackoverflow.com/q/41970613/1718174).
+- Alguns testes como os de Docker/Vagrant demoravam muito (rodar build da
+imagem/VM). Isso consumiu bastante tempo.
+- Algumas soluções/escolhas não foram as melhores possíveis. Por conta do
+tempo foi necessário deixar como melhoria para posterioridade, caso houvesse
+algum tempo sobrando.
+
+OBS: Não usei um sistema mais evoluido de fluxo de desenvolvimento (branches,
+merge, squash, etc), pois sou o único desenvolvedor do projeto. Por conta disso
+praticamente todo o projeto foi desenvolvido no branch master. Sei que se
+houvesse pelo menos 2 desenvolvedores deveria criar branches, abrir um PR, etc.
