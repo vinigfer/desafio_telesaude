@@ -19,8 +19,8 @@
         requirements: /home/vagrant/desafio_telesaude/requirements.txt
         executable: pip3
 
-    # Adicionando resolucao de DNS para 'database'
-    - lineinfile:
+    - name: Adicionando resolucao de DNS para 'database' ...
+      lineinfile:
         dest: /etc/hosts
         line: "192.168.1.147   database"
 

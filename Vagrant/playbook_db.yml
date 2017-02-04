@@ -22,16 +22,19 @@
       become_user: postgres
       shell: psql -c "GRANT ALL PRIVILEGES ON DATABASE telesaude TO usuario;"
 
-    - lineinfile:
+    - name: Configurando acesso externo ao database (parte I) ...
+      lineinfile:
         dest: /etc/postgresql/9.3/main/postgresql.conf
         regexp: "^#listen_addresses = 'localhost'"
         line:   "listen_addresses = '*'"
 
-    - lineinfile:
+    - name: Configurando acesso externo ao database (parte II) ...
+      lineinfile:
         dest: /etc/postgresql/9.3/main/pg_hba.conf
         regexp: "^host    all             all             127.0.0.1/32            md5"
         line:   "host    all             all             0.0.0.0/0            md5"
 
-    - service:
+    - name: Reiniciando serviço Postgresql ...
+      service:
         name: postgresql
         state: restarted
