@@ -23,4 +23,4 @@
       shell: python3 desafio_telesaude/manage.py migrate
 
     - name: Iniciando servidor Python ...
-      shell: cd desafio_telesaude && gunicorn --bind 0.0.0.0:8000 telesaude.wsgi
+      shell: cd desafio_telesaude && gunicorn --bind 0.0.0.0:8000 telesaude.wsgi &
