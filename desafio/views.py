@@ -51,6 +51,11 @@ class TeleconsultorForm(ModelForm):
     class Meta:
         model = Teleconsultor
         fields = ['nome', 'email', 'crm', 'data_formatura']
+        error_messages = {
+            'data_formatura': {
+                'invalid': "Data inválida. Preencha no formato AAAA-MM-DD.",
+            },
+        }
 
 
 def teleconsultor_list(request, template_name='teleconsultor_list.html'):
