@@ -1,25 +1,37 @@
 ---
 - hosts: db
-  sudo: yes
+  become: yes
   tasks:
     - name: Instalando Postgresql Server ...
       package: name={{ item }} update_cache=yes state=latest
       with_items:
         - postgresql
+
     - name: Criando novo usuario no banco de dados ...
-      shell: sudo -u postgres psql -c "CREATE USER usuario WITH PASSWORD 'senha';"
+      become: yes
+      become_user: postgres
+      shell: psql -c "CREATE USER usuario WITH PASSWORD 'senha';"
 
     - name: Criando novo database ...
-      shell: sudo -u postgres psql -c "CREATE DATABASE telesaude;"
+      become: yes
+      become_user: postgres
+      shell: psql -c "CREATE DATABASE telesaude;"
 
     - name: Concedendo permissoes ao usuario ...
-      shell: sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE telesaude TO usuario;"
+      become: yes
+      become_user: postgres
+      shell: psql -c "GRANT ALL PRIVILEGES ON DATABASE telesaude TO usuario;"
 
-    - name: Configurando acesso externo ao database (parte I) ...
-      shell: sed -ie "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/9.3/main/postgresql.conf
+    - lineinfile:
+        dest: /etc/postgresql/9.3/main/postgresql.conf
+        regexp: "^#listen_addresses = 'localhost'"
+        line:   "listen_addresses = '*'"
 
-    - name: Configurando acesso externo ao database (parte II) ...
-      shell: sed -ie "s/# IPv4 local connections:/# IPv4 local connections:\nhost    all             all             0.0.0.0\/0          md5/g" /etc/postgresql/9.3/main/pg_hba.conf
+    - lineinfile:
+        dest: /etc/postgresql/9.3/main/pg_hba.conf
+        regexp: "^host    all             all             127.0.0.1/32            md5"
+        line:   "host    all             all             0.0.0.0/0            md5"
 
-    - name: Reiniciando Postgresql ...
-      shell: service postgresql restart
+    - service:
+        name: postgresql
+        state: restarted

@@ -1,6 +1,6 @@
 ---
 - hosts: web
-  sudo: yes
+  become: yes
   tasks:
     - name: Instalando pacotes necessarios ...
       package: name={{ item }} update_cache=yes state=latest
@@ -10,14 +10,19 @@
         - git-core 
         - libpq-dev 
         - postgresql-client
+
     - name: Clonando repositorio ...
       git: repo=https://github.com/vinigfer/desafio_telesaude.git dest=/home/vagrant/desafio_telesaude
+
     - name: Instalando pacotes python com pip3 ...
       pip: 
         requirements: /home/vagrant/desafio_telesaude/requirements.txt
         executable: pip3
-    - name: Adicionando resolucao de DNS para o nome 'database' ...
-      shell: sed -i '1 i\192.168.1.147   database' /etc/hosts
+
+    # Adicionando resolucao de DNS para 'database'
+    - lineinfile:
+        dest: /etc/hosts
+        line: "192.168.1.147   database"
 
     - name: Rodando migrations ...
       shell: python3 desafio_telesaude/manage.py migrate
