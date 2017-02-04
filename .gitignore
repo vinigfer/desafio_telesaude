@@ -3,3 +3,4 @@
 Docker/*~
 Vagrant/.vagrant/*
 Vagrant/*~
+Vagrant/*.retry

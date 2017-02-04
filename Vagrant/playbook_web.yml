@@ -16,3 +16,11 @@
       pip: 
         requirements: /home/vagrant/desafio_telesaude/requirements.txt
         executable: pip3
+    - name: Adicionando resolucao de DNS para o nome 'database' ...
+      shell: sed -i '1 i\192.168.1.147   database' /etc/hosts
+
+    - name: Rodando migrations ...
+      shell: python3 desafio_telesaude/manage.py migrate
+
+    - name: Iniciando servidor Python ...
+      shell: cd desafio_telesaude && gunicorn --bind 0.0.0.0:8000 telesaude.wsgi
