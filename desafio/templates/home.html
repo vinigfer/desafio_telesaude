@@ -1,6 +1,31 @@
-<h1>Home</h1>
-<ul>
-    <li><a href="{% url "solicitacao_list" %}">Solicitações</a></li>
-    <li><a href="{% url "solicitante_list" %}">Solicitante</a></li>
-    <li><a href="{% url "teleconsultor_list" %}">Teleconsultor</a></li>
-</ul>
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+<div style="margin-top: 20px; border-radius: 20px" class="jumbotron container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4"></div>
+            <div style="text-align: center;" class="col-xs-4">
+                <h2>Home</h2>
+                <p>
+                    <a class="btn btn-primary btn-block"
+                        href='{% url "solicitante_list" %}' >Solicitante
+                    </a>
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-block"
+                        href='{% url "teleconsultor_list" %}' >Teleconsultor
+                    </a>
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-block"
+                        href='{% url "solicitacao_list" %}' >Solicitações
+                    </a>
+                </p>
+            </div>
+            <div class="col-xs-4"></div>
+        </div>
+    </div>
+</div>
