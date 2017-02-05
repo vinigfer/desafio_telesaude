@@ -3,7 +3,7 @@ from django.db import models
 
 class Solicitante(models.Model):
     nome = models.CharField(max_length=100)
-    email = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
     # atributo como texto, pois o CPF pode comecar com 0
     cpf = models.CharField(max_length=11, unique=True)
     # assumindo 9 digitos para celular + 2 para DDD
@@ -15,10 +15,10 @@ class Solicitante(models.Model):
 
 class Teleconsultor(models.Model):
     nome = models.CharField(max_length=100, unique=True)
-    email = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
     # nao esta descrito no PDF, mas em principio cada CRM
     # pode pertencer somente a um Teleconsultor
-    crm = models.IntegerField(unique=True)
+    crm = models.PositiveIntegerField(unique=True)
     data_formatura = models.DateField()
 
     def __str__(self):
