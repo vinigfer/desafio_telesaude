@@ -1,13 +1,45 @@
-<h1>Solicitações</h1>
-<ul>
-    {% for solicitacao in object_list %}
-    <li>{{ solicitacao.solicitante }} -
-        {{ solicitacao.teleconsultor }} -
-        {{ solicitacao.data }} -
-    <a href="{% url "solicitacao_edit" solicitacao.id %}">{{ solicitacao.id }}</a>
-    <a href="{% url "solicitacao_delete" solicitacao.id %}">Apagar</a>
-    </li>
-    {% endfor %}
-</ul>
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
 
-<a href="{% url "solicitacao_new" %}">Nova solicitação</a>
+<h1 style="padding-left: 20px">Solicitações</h1>
+
+<div style="padding: 20px" class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+            <th>Id</th>
+            <th>Solicitante</th>
+            <th>Teleconsultor</th>
+            <th>Data</th>
+            <th></th>
+            </tr>
+        </thead>
+    <tbody>
+        {% for solicitacao in object_list %}
+        <tr>
+            <td>{{ solicitacao.id }}</td>
+            <td>{{ solicitacao.solicitante }}</td>
+            <td>{{ solicitacao.teleconsultor }}</td>
+            <td>{{ solicitacao.data }}</td>
+            <td>
+                <a class="btn btn-primary"
+                    href='{% url "solicitacao_edit" solicitacao.id %}' >
+                    <span class="glyphicon glyphicon-pencil"></span> Editar
+                </a>
+                <a class="btn btn-primary"
+                    href='{% url "solicitacao_delete" solicitacao.id %}' >
+                    <span class="glyphicon glyphicon-remove"></span> Apagar
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+<a style="margin-left: 20px"
+    class="btn btn-primary" href='{% url "solicitacao_new" %}' >
+    <span class="glyphicon glyphicon-plus"></span> Nova Solicitação
+</a>
