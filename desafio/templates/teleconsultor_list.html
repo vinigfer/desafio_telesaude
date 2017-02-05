@@ -1,12 +1,47 @@
-<h1>Teleconsultores</h1>
-<ul>
-    {% for teleconsultor in object_list %}
-    <li>{{ teleconsultor.nome }} - {{ teleconsultor.email }} -
-    <a href="{% url "teleconsultor_edit" teleconsultor.id %}">{{ teleconsultor.crm }}</a>
-    - {{ teleconsultor.data_formatura }}
-    <a href="{% url "teleconsultor_delete" teleconsultor.id %}">Apagar</a>
-    </li>
-    {% endfor %}
-</ul>
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
 
-<a href="{% url "teleconsultor_new" %}">Novo Teleconsultor</a>
+<h1 style="padding-left: 20px">Teleconsultores</h1>
+
+<div style="padding: 20px" class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>CRM</th>
+            <th>Data Formatura</th>
+            <th></th>
+            </tr>
+        </thead>
+    <tbody>
+        {% for teleconsultor in object_list %}
+        <tr>
+            <td>{{ teleconsultor.id }}</td>
+            <td>{{ teleconsultor.nome }}</td>
+            <td>{{ teleconsultor.email }}</td>
+            <td>{{ teleconsultor.crm }}</td>
+            <td>{{ teleconsultor.data_formatura }}</td>
+            <td>
+                <a class="btn btn-primary"
+                    href='{% url "teleconsultor_edit" teleconsultor.id %}' >
+                    <span class="glyphicon glyphicon-pencil"></span> Editar
+                </a>
+                <a class="btn btn-primary"
+                    href='{% url "teleconsultor_delete" teleconsultor.id %}' >
+                    <span class="glyphicon glyphicon-remove"></span> Apagar
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+<a style="margin-left: 20px"
+    class="btn btn-primary" href='{% url "teleconsultor_new" %}' >
+    <span class="glyphicon glyphicon-plus"></span> Novo Teleconsultor
+</a>
