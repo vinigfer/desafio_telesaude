@@ -14,6 +14,16 @@ class SolicitanteForm(ModelForm):
         model = Solicitante
         fields = ['nome', 'email', 'cpf', 'telefone']
 
+    def __init__(self, *args, **kwargs):
+        super(SolicitanteForm, self).__init__(*args, **kwargs)
+        self.fields['cpf'].label = 'CPF'
+        self.fields['cpf'].widget.attrs.update({
+            'placeholder': 'Números apenas',
+        })
+        self.fields['email'].widget.attrs.update({
+            'placeholder': 'email@examplo.com',
+        })
+
 
 def solicitante_list(request, template_name='solicitante_list.html'):
     solicitantes = Solicitante.objects.all()
@@ -57,6 +67,20 @@ class TeleconsultorForm(ModelForm):
             },
         }
 
+    def __init__(self, *args, **kwargs):
+        super(TeleconsultorForm, self).__init__(*args, **kwargs)
+        self.fields['crm'].label = 'CRM'
+        self.fields['crm'].widget.attrs.update({
+            'placeholder': 'Números apenas',
+        })
+        self.fields['email'].widget.attrs.update({
+            'placeholder': 'email@examplo.com',
+        })
+        self.fields['data_formatura'].widget.attrs.update({
+            'placeholder': 'AAAA-MM-DD',
+        })
+
+
 
 def teleconsultor_list(request, template_name='teleconsultor_list.html'):
     teleconsultores = Teleconsultor.objects.all()
@@ -94,6 +118,15 @@ class SolicitacaoForm(ModelForm):
     class Meta:
         model = Solicitacao
         fields = ['texto', 'data', 'solicitante', 'teleconsultor']
+
+    def __init__(self, *args, **kwargs):
+        super(SolicitacaoForm, self).__init__(*args, **kwargs)
+        self.fields['data'].widget.attrs.update({
+            'placeholder': 'AAAA-MM-DD',
+        })
+        self.fields['texto'].widget.attrs.update({
+            'placeholder': 'Digite aqui sua solicitação',
+        })
 
 
 def solicitacao_list(request, template_name='solicitacao_list.html'):
