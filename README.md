@@ -14,11 +14,17 @@ Requisitos:
 
 Como executar o projeto:
 - Usando Docker
-    * Acesse o diretório Docker do projeto e execute ```docker-compose up -d```
+    * Abra um terminal, acesse o diretório Docker do projeto, e execute ```docker-compose up -d```
+    * Abra o seu navegador e digite ```http://localhost:8000/```
 - Usando Vagrant, VirtualBox e Ansible
-    * Acesse o diretório Vagrant do projeto e execute ```vagrant up```
+    * Abra um terminal, acesse o diretório Vagrant do projeto, e execute ```vagrant up```
+    * Abra o seu navegador e digite ```http://localhost:8000/```
 - Localmente (sem VMs ou containers)
-    * 
+    * Abra um terminal, e no diretório do projeto execute ```sudo ./install.sh```
+    * Execute ```python3 manage.py runserver```
+    * Abra o seu navegador e digite ```http://localhost:8000/```
 
 Limitações:
+- Usando Docker ou Vagrant/Ansible, ao destruir os containers/VMs todos os dados são perdidos.
+- Ao usar Vagrant, assume-se que o endereço de rede 192.168.1.147 está disponível para criar VM com o database. Se o mesmo nao estiver disponível ou o computador estiver em outra faixa de rede, escolha outro endereço disponível e atualize Vagrantfile e playbook_web.yml
 - Testado apenas em ambiente Ubuntu 14.04, mas deve funcionar em versões posteriores ou debian-like.
