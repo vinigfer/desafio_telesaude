@@ -20,7 +20,7 @@ class SolicitanteTests(TestCase):
     def test_read(self):
         response = self.client.get(reverse('solicitante_list'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<ul>\n    \n</ul>")
+        self.assertContains(response, "<tbody>\n        \n    </tbody>")
         self.assertQuerysetEqual(response.context['object_list'], [])
 
     def test_update(self):
@@ -74,7 +74,7 @@ class TeleconsultorTests(TestCase):
     def test_read(self):
         response = self.client.get(reverse('teleconsultor_list'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<ul>\n    \n</ul>")
+        self.assertContains(response, "<tbody>\n        \n    </tbody>")
         self.assertQuerysetEqual(response.context['object_list'], [])
 
     def test_update(self):

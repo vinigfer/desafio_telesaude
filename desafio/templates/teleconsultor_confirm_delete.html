@@ -3,6 +3,7 @@
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
 
+<form method="post">{% csrf_token %}
 <div style="margin-top: 20px; border-radius: 20px" class="jumbotron container">
     <div class="container">
         <div class="row">
@@ -18,3 +19,4 @@
         </div>
     </div>
 </div>
+</form>
