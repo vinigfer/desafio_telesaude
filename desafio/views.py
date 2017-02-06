@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
+from django.core.exceptions import NON_FIELD_ERRORS
 
 from desafio.models import Solicitante, Teleconsultor, Solicitacao
 
@@ -118,6 +119,12 @@ class SolicitacaoForm(ModelForm):
     class Meta:
         model = Solicitacao
         fields = ['texto', 'data', 'solicitante', 'teleconsultor']
+        error_messages = {
+            NON_FIELD_ERRORS: {
+                'unique_together': "Este solicitante já tem uma solicitação \
+                                    agendada para este dia.",
+            }
+        }
 
     def __init__(self, *args, **kwargs):
         super(SolicitacaoForm, self).__init__(*args, **kwargs)
