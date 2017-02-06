@@ -1,0 +1,29 @@
+# criar o projeto inicial
+django-admin startproject telesaude && cd telesaude
+
+# Criar o App
+python3 manage.py startapp desafio
+
+# Cria novo migration baseado em mudancas feitas no modelo
+python3 manage.py makemigrations desafio
+
+# Rodar migrations que ainda nao foram executadas
+python3 manage.py migrate
+
+# uma outra forma de rodar as migrations, usando heroku inclusive
+heroku run --app desafio-telesaude python3 manage.py syncdb
+
+# Abrindo shell/CLI, onde podemos rodar codigo python
+python3 manage.py shell
+
+# Criando um usuario admin para o projeto (para testes recomenda-se admin/admin e email admin@example.com)
+python3 manage.py createsuperuser
+
+# Rodar os testes
+python3 manage.py test desafio
+
+# Rodar o projeto no ambiente de desenvolvimento:
+python3 manage.py runserver
+
+
+
