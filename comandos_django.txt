@@ -25,5 +25,5 @@ python3 manage.py test desafio
 # Rodar o projeto no ambiente de desenvolvimento:
 python3 manage.py runserver
 
-
-
+# Copia todos os assets staticos, de todos os apps, para apenas um local (definido na variável STATIC_ROOT)
+python manage.py collectstatic
