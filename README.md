@@ -1,6 +1,6 @@
-# Desafio Telesaúde
+# Desafio Telessaúde
 
-Repositório para a prova técnica de vaga no projeto Telesaúde UFRGS. Código em Python Django, com deploy para Heroku, Docker, e VirtualBox (usando Ansible). Distribuído livremente sobre licença MIT.
+Repositório para a prova técnica de vaga no projeto Telessaúde UFRGS. Código em Python Django, com deploy para Heroku, Docker, e VirtualBox (usando Ansible). Distribuído livremente sobre licença MIT.
 
 Requisitos:
 - Acesso admin/sudo para instalar pacotes caso os mesmos não estejam instalados
