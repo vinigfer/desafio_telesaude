@@ -1,5 +1,5 @@
 # criar o projeto inicial
-django-admin startproject telesaude && cd telesaude
+django-admin startproject telessaude && cd telessaude
 
 # Criar o App
 python3 manage.py startapp desafio
@@ -11,7 +11,7 @@ python3 manage.py makemigrations desafio
 python3 manage.py migrate
 
 # uma outra forma de rodar as migrations, usando heroku inclusive
-heroku run --app desafio-telesaude python3 manage.py syncdb
+heroku run --app desafio-telessaude python3 manage.py syncdb
 
 # Abrindo shell/CLI, onde podemos rodar codigo python
 python3 manage.py shell

@@ -12,11 +12,11 @@
         - postgresql-client
 
     - name: Clonando repositorio ...
-      git: repo=https://github.com/vinigfer/desafio_telesaude.git dest=/home/vagrant/desafio_telesaude
+      git: repo=https://github.com/vinigfer/desafio_telessaude.git dest=/home/vagrant/desafio_telessaude
 
     - name: Instalando pacotes python com pip3 ...
       pip: 
-        requirements: /home/vagrant/desafio_telesaude/requirements.txt
+        requirements: /home/vagrant/desafio_telessaude/requirements.txt
         executable: pip3
 
     - name: Adicionando resolucao de DNS para 'database' ...
@@ -25,7 +25,7 @@
         line: "192.168.1.147   database"
 
     - name: Rodando migrations ...
-      shell: python3 desafio_telesaude/manage.py migrate
+      shell: python3 desafio_telessaude/manage.py migrate
 
     - name: Iniciando servidor Python ...
-      shell: cd desafio_telesaude && gunicorn --bind 0.0.0.0:8000 telesaude.wsgi &
+      shell: cd desafio_telessaude && gunicorn --bind 0.0.0.0:8000 telessaude.wsgi &

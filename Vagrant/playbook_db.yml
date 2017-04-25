@@ -15,12 +15,12 @@
     - name: Criando novo database ...
       become: yes
       become_user: postgres
-      shell: psql -c "CREATE DATABASE telesaude;"
+      shell: psql -c "CREATE DATABASE telessaude;"
 
     - name: Concedendo permissoes ao usuario ...
       become: yes
       become_user: postgres
-      shell: psql -c "GRANT ALL PRIVILEGES ON DATABASE telesaude TO usuario;"
+      shell: psql -c "GRANT ALL PRIVILEGES ON DATABASE telessaude TO usuario;"
 
     - name: Configurando acesso externo ao database (parte I) ...
       lineinfile:
