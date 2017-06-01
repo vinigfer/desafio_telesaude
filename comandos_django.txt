@@ -4,6 +4,9 @@ django-admin startproject telessaude && cd telessaude
 # Criar o App
 python3 manage.py startapp desafio
 
+# Criar models a partir do que j existe no banco de dados
+python manage.py inspectdb > models.py
+
 # Cria novo migration baseado em mudancas feitas no modelo
 python3 manage.py makemigrations desafio
 
