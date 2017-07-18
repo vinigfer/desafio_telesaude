@@ -10,6 +10,10 @@ python manage.py inspectdb > models.py
 # Cria novo migration baseado em mudancas feitas no modelo
 python3 manage.py makemigrations desafio
 
+# Cria data migration para alteracao/atualizacao de dados.
+# Mais detalhes aqui: https://docs.djangoproject.com/en/1.11/topics/migrations/#data-migrations
+python3 manage.py makemigrations --empty nome_do_app
+
 # Rodar migrations que ainda nao foram executadas
 python3 manage.py migrate
 
