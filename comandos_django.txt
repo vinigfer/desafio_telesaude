@@ -18,7 +18,7 @@ python3 manage.py makemigrations --empty nome_do_app
 python3 manage.py migrate
 
 # Reverter uma migration que ja foi executada
-python3 manage.py migrate nome_do_app numero_da_migration
+python3 manage.py migrate nome_do_app numero_da_migration_para_a_qual_queremos_voltar
 
 # uma outra forma de rodar as migrations, usando heroku inclusive
 heroku run --app desafio-telessaude python3 manage.py syncdb
