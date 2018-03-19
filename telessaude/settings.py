@@ -81,10 +81,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'telessaude',
-        'USER': 'usuario',
-        'PASSWORD': 'senha',
-        'HOST': 'database',
-        'PORT': '5432',
+        'USER': 'postgres',
+        # 'USER': 'usuario',
+        # 'PASSWORD': 'senha',
+        # 'HOST': 'database',
+        # 'PORT': '5432',
     }
 }
 # Atualiza as informacoes do database caso estejamos utilizando heroku
@@ -173,3 +174,10 @@ BOOTSTRAP3 = {
         'inline': 'bootstrap3.renderers.InlineFieldRenderer',
     },
 }
+
+import sys
+if 'test' in sys.argv:
+    try:
+        from .test import *
+    except ImportError:
+        pass

@@ -54,7 +54,7 @@ class SolicitanteTests(TestCase):
             Solicitante.objects.create(nome="Maria", email="maria@email.com",
                                        cpf="01022233345", telefone="5133337777")
         except IntegrityError as e:
-            if 'unique constraint' in e.__str__():
+            if 'unique constraint' in e.__str__().lower():
                 self.assertTrue(True)
             else:
                 raise Exception("Um erro inesperado ocorreu")
@@ -111,7 +111,7 @@ class TeleconsultorTests(TestCase):
                                          data_formatura="2008-07-19",
                                          crm="57432", email="leticia@email.com")
         except IntegrityError as e:
-            if 'unique constraint' in e.__str__():
+            if 'unique constraint' in e.__str__().lower():
                 self.assertTrue(True)
             else:
                 raise Exception("Um erro inesperado ocorreu")
@@ -190,7 +190,7 @@ class SolicitacaoTests(TestCase):
             self.create_solicitante_e_teleconsultor()
             self.create_solicitante_e_teleconsultor()
         except IntegrityError as e:
-            if 'unique constraint' in e.__str__():
+            if 'unique constraint' in e.__str__().lower():
                 self.assertTrue(True)
             else:
                 raise Exception("Um erro inesperado ocorreu")
