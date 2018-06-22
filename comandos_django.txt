@@ -1,8 +1,12 @@
 # criar o projeto inicial
 django-admin startproject telessaude && cd telessaude
+# OU (especificando em um diretório/repositório git que já existe)
+django-admin startproject .
 
 # Criar o App
 python3 manage.py startapp desafio
+# OU (especificando um local)
+python3 manage.py startapp desafio apps/desafio/
 
 # Criar models a partir do que ja existe no banco de dados
 python manage.py inspectdb > models.py
